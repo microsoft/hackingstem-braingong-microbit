@@ -47,8 +47,7 @@ brain_sensor_5_tare = tare(BRAIN_SENSOR_PIN5)
 # This function reads voltage of from each pin attached to a pressure sensor 
 # and then subtracts the tare value we calculated for it earlier.
 def process_sensors():
-    global brain_sensor_1, brain_sensor_2, brain_sensor_3, brain_sensor_4, 
-    brain_sensor_5
+    global brain_sensor_1, brain_sensor_2, brain_sensor_3, brain_sensor_4, brain_sensor_5
     brain_sensor_1 = BRAIN_SENSOR_PIN1.read_analog() - brain_sensor_1_tare
     brain_sensor_2 = BRAIN_SENSOR_PIN2.read_analog() - brain_sensor_2_tare
     brain_sensor_3 = BRAIN_SENSOR_PIN3.read_analog() - brain_sensor_3_tare
@@ -62,9 +61,9 @@ def process_sensors():
 
 parsedData = [0] * 5
 
- #   This function gets data from serial and builds it into a string
+#   This function gets data from serial and builds it into a string
 def getData():
-       global parsedData, builtString
+    global parsedData, builtString
     builtString = ""
     while uart.any() is True:
         byteIn = uart.read(1)
@@ -89,7 +88,6 @@ while (True):
     process_sensors()
     serial_in_data = getData()
     if (serial_in_data[0] != "#pause"):
-        uart.write('{},{},{},{},{}'.format(brain_sensor_1, brain_sensor_2, 
-        brain_sensor_3, brain_sensor_4, brain_sensor_5)+EOL)
+        uart.write('{},{},{},{},{}'.format(brain_sensor_1, brain_sensor_2, brain_sensor_3, brain_sensor_4, brain_sensor_5)+EOL)
 
     sleep(DATA_RATE)
