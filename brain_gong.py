@@ -1,8 +1,10 @@
 # ------------__ Hacking STEM – brain_gong.py – micro:bit __-----------
-# For use with the Lesson plan available
+# For use with the Lesson plan available [TODO waiting on name for lesson]
 # from Microsoft Education Workshop at http://aka.ms/hackingSTEM
 #
-#  Overview:
+#  Overview: This project reads voltage on 5 GPIO pins and writes those values 
+#  to serial. It also tares (zeros out) the readings on start up, and reads 
+#  serial and looks for keywords.
 #
 #  This project uses a BBC micro:bit microcontroller, information at:
 #  https://microbit.org/
@@ -24,17 +26,17 @@ uart.init(baudrate=9600)  # Sets serial baud rate
 DATA_RATE = 10 # Frequency of code looping
 EOL = '\n' # End of Line Character
 
-# These constants are the pins we use on the micro:bit for each one of our 
-# sensors
+# These constants are the pins used on the micro:bit for the sensors 
 BRAIN_SENSOR_PIN1 = pin0
 BRAIN_SENSOR_PIN2 = pin1
 BRAIN_SENSOR_PIN3 = pin2
 BRAIN_SENSOR_PIN4 = pin3
 BRAIN_SENSOR_PIN5 = pin4
 
-# Each sensor has some level of variablity in the readings it outputs. This 
-# function shifts the base line up or down so the starting value is close to 0
+#TODO Remove this function
 def tare(pin):
+    # Each sensor has some level of variablity in the readings it outputs. This 
+    # function shifts the base line up or down so the starting value is close to 0
     tare_value = pin.read_analog()
     return tare_value
 
@@ -44,9 +46,9 @@ brain_sensor_3_tare = tare(BRAIN_SENSOR_PIN3)
 brain_sensor_4_tare = tare(BRAIN_SENSOR_PIN4)
 brain_sensor_5_tare = tare(BRAIN_SENSOR_PIN5)
 
-# This function reads voltage of from each pin attached to a pressure sensor 
-# and then subtracts the tare value we calculated for it earlier.
 def process_sensors():
+    # This function reads voltage of from each pin attached to a pressure sensor 
+    # and then subtracts the tare value we calculated for it earlier.
     global brain_sensor_1, brain_sensor_2, brain_sensor_3, brain_sensor_4, brain_sensor_5
     brain_sensor_1 = BRAIN_SENSOR_PIN1.read_analog() - brain_sensor_1_tare
     brain_sensor_2 = BRAIN_SENSOR_PIN2.read_analog() - brain_sensor_2_tare
@@ -59,10 +61,11 @@ def process_sensors():
 #---------------The Code Below Here is for Excel Communication----------------#
 #=============================================================================#
 
+# Array to hold the serial data
 parsedData = [0] * 5
 
-#   This function gets data from serial and builds it into a string
 def getData():
+    #   This function gets data from serial and builds it into a string
     global parsedData, builtString
     builtString = ""
     while uart.any() is True:
@@ -75,8 +78,8 @@ def getData():
     parseData(builtString)
     return (parsedData)
 
-#   This function seperates the string into an array
 def parseData(s):
+    #   This function seperates the string into an array
     global parsedData
     if s != "":
         parsedData = s.split(",")
@@ -88,6 +91,7 @@ while (True):
     process_sensors()
     serial_in_data = getData()
     if (serial_in_data[0] != "#pause"):
+        #uart is the micro:bit command for serial
         uart.write('{},{},{},{},{}'.format(brain_sensor_1, brain_sensor_2, brain_sensor_3, brain_sensor_4, brain_sensor_5)+EOL)
 
     sleep(DATA_RATE)
