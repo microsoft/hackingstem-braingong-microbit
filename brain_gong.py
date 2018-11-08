@@ -1,6 +1,7 @@
 # ------------__ Hacking STEM – brain_gong.py – micro:bit __-----------
-# For use with the Lesson plan available [TODO waiting on name for lesson]
-# from Microsoft Education Workshop at http://aka.ms/hackingSTEM
+#  For use with the Building Models to Understand and Mitigate Brain Injury
+#  lesson plan available from Microsoft Education Workshop at 
+#  http://aka.ms/hackingSTEM
 #
 #  Overview: This project reads voltage on 5 GPIO pins and writes those values 
 #  to serial. It also tares (zeros out) the readings on start up, and reads 
