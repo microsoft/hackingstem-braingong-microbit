@@ -1,7 +1,7 @@
 # ------------__ Hacking STEM – brain_gong.py – micro:bit __-----------
 #  For use with the Building Models to Understand and Mitigate Brain Injury
 #  lesson plan available from Microsoft Education Workshop at
-# https://www.microsoft.com/en-us/education/education-workshop/brain-impact-simulator.aspx
+#  https://education.microsoft.com/hackingStem/lesson/ecaf3891
 #  http://aka.ms/hackingSTEM
 #
 #  Overview: This project reads voltage on 5 GPIO pins and writes those values 

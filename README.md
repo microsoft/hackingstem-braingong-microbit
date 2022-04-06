@@ -2,7 +2,7 @@
 Microcontroller code for Microsoft Hacking STEM Brain Impact Simulator lesson plan adapted for mic:bit
 
 # Getting Started
-1. Download lesson assets at https://www.microsoft.com/en-us/education/education-workshop/brain-impact-simulator.aspx
+1. Download lesson assets at https://education.microsoft.com/hackingStem/lesson/ecaf3891
 1. Build your brain sensors!
 1. Use [Mu for Python](https://codewith.mu/) to flash the .py to your  [micro:bit](https://www.microbit.org/) microcontroller
 1. Verify data interactions in Excel
